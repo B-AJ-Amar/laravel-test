@@ -14,6 +14,13 @@
                 <p>
                     {{$product->description}}
                 </p>
+
+                <h1 class=" bold">Categories :</h1>
+                @foreach ($product->categories as $category)
+                    <button class=" bg-white p-1 rounded-xl">
+                        {{$category->name}}
+                    </button>
+                @endforeach
                 
             </x-card>
             

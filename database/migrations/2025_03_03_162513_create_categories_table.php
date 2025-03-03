@@ -21,8 +21,8 @@ return new class extends Migration
 
         Schema::create('category_product', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class)->constrained();
-            $table->foreignIdFor(Category::class)->constrained();
+            $table->foreignIdFor(Product::class)->constrained()->onDelete("cascade");
+            $table->foreignIdFor(Category::class)->constrained()->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('categories');
-        Schema::dropIfExists('products_categories');
+        Schema::dropIfExists('category_product');
     }
 };

@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
         
         Product::all()->each(function ($product) use ($categories) { 
             $product->categories()->attach(
-                $categories->random(rand(1, 3))->pluck('id')->toArray()
+                $categories->random(rand(3, 7))->pluck('id')->toArray()
             ); 
         });
         
