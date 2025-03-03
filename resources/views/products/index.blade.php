@@ -11,12 +11,13 @@
     
         <ul>
             @foreach ($products as $product)
-            <x-card :iname="$product['name']" >
+            <x-card :product="$product" >
 
                 <a class=" bold  text-blue-800" href="{{route('products.show', $product->id)}}">details</a>
      
             </x-card>
             @endforeach
+            {{$products->links()}}
             
         </ul>
     </x-layout>

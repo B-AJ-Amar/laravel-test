@@ -9,7 +9,11 @@
             @endif
         </x-slot>
     
-            <x-card :iname="$product->name" >
+            <x-card :product="$product" >
+                <h1 class=" bold">Description :</h1>
+                <p>
+                    {{$product->description}}
+                </p>
                 
             </x-card>
             
