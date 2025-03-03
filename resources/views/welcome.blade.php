@@ -21,7 +21,7 @@
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
         <h1 class=" text-amber-50">Wellcome <a href="/items">click here</a> to go to items</h1>
-        <
+        
         
     </body>
 </html>
