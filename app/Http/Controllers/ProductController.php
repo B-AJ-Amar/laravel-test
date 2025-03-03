@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         
-        return view('products.index',["title"=>"ITEMS TITLE", 'products'=>Product::all() ]);
+        return view('products.index',["title"=>"ITEMS TITLE", 'products'=>Product::orderBy("created_at",'desc')->paginate(5) ]);
 
     }
 
@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create',["title"=>"ITEMS TITLE", 'items'=>Product::all() ]);
+        // return view('products.create',["title"=>"ITEMS TITLE", 'items'=>Product::all() ]);
     }
 
     /**
