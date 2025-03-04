@@ -29,7 +29,10 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+
     {
+        Product::create($request->all());
+        return redirect()->route("products.index");
 
         
     }
