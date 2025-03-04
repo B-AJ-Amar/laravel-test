@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title ?: "No Title" }}</title>
+    <title>{{ $title ?? "Default Title" }}</title>
 
      <!-- Fonts -->
      <link rel="preconnect" href="https://fonts.bunny.net">
@@ -48,10 +48,23 @@
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-4">
                   <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                  @auth
                   <a href="{{route('products.index')}}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
-                  {{-- <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a> --}}
-                  <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
                   <a href="{{route('products.create')}}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">New Product</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Logout</button>
+                    </form>
+                  
+                  @endauth
+                  
+                  @guest
+                  <a href="{{route('auth.showLogin')}}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+                  <a href="{{route('auth.showRegister')}}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">signup</a>
+                  
+                  @endguest
+                  {{-- <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a> --}}
+                  {{-- <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a> --}}
                 </div>
               </div>
             </div>
@@ -106,6 +119,23 @@
           </div>
         </div>
       </nav>
+
+      @if($errors->any())
+        @foreach ($errors->all() as $err)
+        <div class="bg-red-100 m-1 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Error !</strong>
+            <span class="block sm:inline">{{ $err }}</span>
+          </div>
+            
+        @endforeach
+      @endif
+      @if(@session('success'))
+        <div class="bg-green-100 m-1 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Success !</strong>
+            <span class="block sm:inline">{{ session('success') }}</span>
+          </div>
+      @endif
+      
 
     <main class=" ">
         {{ $slot }}
