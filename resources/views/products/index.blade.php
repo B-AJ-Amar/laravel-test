@@ -13,8 +13,15 @@
             @foreach ($products as $product)
             <x-card :product="$product" >
 
-                <a class=" bold  text-blue-800" href="{{route('products.show', $product->id)}}">details</a>
-     
+                <div class=" my-3">
+                    <a class=" p-1 rounded-xl text-amber-50 bg-blue-500" href="{{route('products.show', $product->id)}}">details</a>
+                    <a class=" p-1 rounded-xl text-amber-50 bg-yellow-500" href="{{route('products.edit', $product->id)}}">update</a>
+                    <form class=" inline" method="POST" action="{{route('products.destroy', $product->id)}}">
+                        @csrf
+                        @method('DELETE')
+                        <button class=" p-1 rounded-xl text-amber-50 bg-red-500" type="submit">delete</button>
+                    </form>
+                </div>
             </x-card>
             @endforeach
             {{$products->links()}}

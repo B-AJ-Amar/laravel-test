@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         
-        return view('products.index',["title"=>"ITEMS TITLE", 'products'=>Product::with("categories")->orderBy("created_at",'desc')->paginate(5) ]);
+        return view('products.index',["title"=>"products", 'products'=>Product::with("categories")->orderBy("created_at",'desc')->paginate(5) ]);
 
     }
 
@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // return view('products.create',["title"=>"ITEMS TITLE", 'items'=>Product::all() ]);
+        return view('products.create',["title"=>"New product" ]);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('products.edit',["title"=>"Edit product", 'product'=>Product::findOrFail($id) ]);
     }
 
     /**
@@ -55,7 +55,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+        return redirect()->route("products.show",$id);
     }
 
     /**
@@ -63,6 +65,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route("products.index");
+        // return 
         //
     }
 }

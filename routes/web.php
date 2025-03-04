@@ -9,10 +9,11 @@ Route::get('/', function () {
 
 
 Route::get('/products', [ProductController::class, "index"] )->name("products.index");
+Route::get('/products/create', [ProductController::class, "create"] )->name("products.create");
 Route::get('/products/{id}', [ProductController::class, "show"] )->name("products.show");
-
-
-
+Route::delete('/products/{id}', [ProductController::class, "destroy"] )->name("products.destroy");
+Route::get('/products/{id}/update', [ProductController::class, "edit"] )->name("products.edit");
+Route::put('/products/{id}', [ProductController::class, "update"] )->name("products.update");
 
 
 
